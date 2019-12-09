@@ -41,3 +41,17 @@ ALTER TABLE Goods
 --Drop table column
 ALTER TABLE Goods
     DROP COLUMN Sale
+
+/*>>>>>>>>>>DML<<<<<<<<<<*/
+
+--INSERT data
+use EStoreDB
+INSERT INTO Goods
+    (Name, Cost, Weight)
+VALUES ('SmartTV', 50000, 17),
+       ('Headphones', 3000, 0.3),
+       ('Purse', 1000, 0.1)
+       
+ALTER TABLE Goods
+ALTER COLUMN Weight decimal NOT NULL 
+       
