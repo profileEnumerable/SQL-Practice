@@ -44,14 +44,35 @@ ALTER TABLE Goods
 
 /*>>>>>>>>>>DML<<<<<<<<<<*/
 
---INSERT data
+--INSERT data to TABLE
 use EStoreDB
-INSERT INTO Goods
-    (Name, Cost, Weight)
+
+--Basic INSERT 
+-- We should dont specified keyword: INTO
+INSERT Goods
+(Name, Cost, Weight)
 VALUES ('SmartTV', 50000, 17),
        ('Headphones', 3000, 0.3),
        ('Purse', 1000, 0.1)
-       
-ALTER TABLE Goods
-ALTER COLUMN Weight decimal NOT NULL 
-       
+
+--INSERT with specified IDENTITY(Id) column 
+SET IDENTITY_INSERT Goods ON
+
+INSERT INTO Goods
+(id, Name, Cost, Weight)
+VALUES (50, 'Graphic Card', 6500, 0.45)
+
+SET IDENTITY_INSERT Goods OFF
+
+--SELECT all the rows
+SELECT *
+FROM Goods
+
+--SELECT specific rows
+SELECT [Name], [Weight]
+FROM Goods
+
+--SELECT with filter
+SELECT [Name]
+FROM Goods
+WHERE id = 1
