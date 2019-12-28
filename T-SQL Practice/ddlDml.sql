@@ -104,7 +104,7 @@ UPDATE Goods
 SET Cost = sg.Cost
 FROM Goods AS g
          JOIN SoftwareGoods AS sg ON g.id = sg.Id
- 
+
 --Basic /DELETE/
 --DELETE specific row
 DELETE Goods
@@ -115,5 +115,28 @@ DELETE Goods
 
 --Basic /TRUNCATE/ 
 --TRUNCATE TABLE
-TRUNCATE TABLE Goods 
+TRUNCATE TABLE Goods
 TRUNCATE TABLE SoftwareGoods
+
+--Intermediate command OUTPUT
+--Check "inserted" TABLE when make an INSERT query
+INSERT INTO Goods (Name, Cost, Weight)
+OUTPUT inserted.*
+VALUES ('Soundbar', 10000, 3),
+       ('Notepad', 200, 0.2),
+       ('Gamepad', 2000, 0.3)
+
+--Check "deleted" TABLE when make a DELETE query
+DELETE Goods
+OUTPUT deleted.id , deleted.Name
+WHERE id = 2
+
+--Check both inserted/deleted tables when make an UPDATE query
+UPDATE Goods
+SET Sale = 50
+OUTPUT inserted.id ,inserted.Name, inserted.Sale AS ["New Sale"] ,deleted.Sale "Old Sale"
+WHERE id = 4
+
+--Write affected data from deleted(syst. table) to another table
+DELETE Goods
+OUTPUT deleted.id , deleted.Name, deleted.Cost INTO SoftwareGoods
