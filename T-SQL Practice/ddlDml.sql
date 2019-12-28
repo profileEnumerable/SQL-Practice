@@ -118,7 +118,7 @@ DELETE Goods
 TRUNCATE TABLE Goods
 TRUNCATE TABLE SoftwareGoods
 
---Intermediate command OUTPUT
+--Intermediate command /OUTPUT/
 --Check "inserted" TABLE when make an INSERT query
 INSERT INTO Goods (Name, Cost, Weight)
 OUTPUT inserted.*
@@ -140,3 +140,17 @@ WHERE id = 4
 --Write affected data from deleted(syst. table) to another table
 DELETE Goods
 OUTPUT deleted.id , deleted.Name, deleted.Cost INTO SoftwareGoods
+
+--Usage TABLE variable with OUTPUT keyword
+DECLARE @softwareGoodsTable TABLE
+                            (
+                                [id]   int,
+                                [Name] varchar(35)
+                            )
+
+--DELETE all table rows and put their INTO "@softwareGoodsTable" variable 
+DELETE SoftwareGoods
+OUTPUT deleted.Id , deleted.Name INTO @softwareGoodsTable
+
+SELECT *
+FROM @softwareGoodsTable
