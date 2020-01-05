@@ -35,11 +35,21 @@ ALTER TABLE Goods
 
 --Add table column 
 ALTER TABLE Goods
-    ADD Sale decimal
+    ADD Sale decimal NOT NULL
 
 --Drop table column
 ALTER TABLE Goods
     DROP COLUMN Sale
+
+--DELETE all row herewith dont reset the IDENTITY value for field: "id"  
+DELETE Goods
+OUTPUT deleted.*
+
+--Basic /TRUNCATE/ 
+--TRUNCATE TABLE
+TRUNCATE TABLE Goods
+TRUNCATE TABLE SoftwareGoods
+
 
 /*>>>>>>>>>>Transact-SQL:DML<<<<<<<<<<*/
 use EStoreDB
@@ -110,14 +120,6 @@ FROM Goods AS g
 DELETE Goods
 WHERE id = 52
 
---DELETE all row herewith dont reset the IDENTITY value for field: "id"  
-DELETE Goods
-
---Basic /TRUNCATE/ 
---TRUNCATE TABLE
-TRUNCATE TABLE Goods
-TRUNCATE TABLE SoftwareGoods
-
 --Intermediate command /OUTPUT/
 --Check "inserted" TABLE when make an INSERT query
 INSERT INTO Goods (Name, Cost, Weight)
@@ -134,7 +136,7 @@ WHERE id = 2
 --Check both inserted/deleted tables when make an UPDATE query
 UPDATE Goods
 SET Sale = 50
-OUTPUT inserted.id ,inserted.Name, inserted.Sale AS ["New Sale"] ,deleted.Sale "Old Sale"
+OUTPUT inserted.id ,inserted.Name, inserted.Sale AS ["New Sale"] ,deleted.Sale AS "Old Sale"
 WHERE id = 4
 
 --Write affected data from deleted(syst. table) to another table
@@ -153,4 +155,4 @@ DELETE SoftwareGoods
 OUTPUT deleted.Id , deleted.Name INTO @softwareGoodsTable
 
 SELECT *
-FROM @softwareGoodsTable
+FROM @softwareGoodsTable 
