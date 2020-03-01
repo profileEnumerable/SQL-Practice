@@ -69,7 +69,7 @@ WHERE Department LIKE 'sales'
 --/%/ any amount of any characters
 SELECT *
 FROM Employees
-WHERE Phone LIKE '063%' 
+WHERE Phone LIKE '063%'
 
 --/_/ any one character
 SELECT *
@@ -77,9 +77,48 @@ FROM Employees
 WHERE Id LIKE '_2'
 
 --/[]/ range of characters
---1) explicitly defined  range
+--1) explicitly defined range
 SELECT *
 FROM Employees
 WHERE Id LIKE '[2,4]2'
 
 --2) implicitly defined range
+SELECT *
+FROM Employees
+WHERE Id LIKE '[2-7]2'
+
+--/[^]/ negative range
+SELECT *
+FROM Employees
+WHERE Id LIKE '[^2-7]2'
+
+--ESCAPE keyword
+--TODO: investigate the ESCAPE keyword
+SELECT *
+FROM Employees
+WHERE FName LIKE '%Bob' ESCAPE '\'
+
+--8) Compare with NULL
+--Note: salary within found records must be NULL
+--1) /IS NULL/
+SELECT *
+FROM Employees
+WHERE Salary IS NULL
+
+--2) /IS NOT NULL/
+SELECT *
+FROM Employees
+WHERE Salary IS NOT NULL
+
+--Note: feature of using NULL, fields with NULL won't include in resulted set
+--answer on above question about predefined list
+SELECT *
+FROM Employees
+WHERE Salary IN (4000, 6000, NULL)
+
+--How to include in the selection, rows with fields that have NULL values(using IN operator)
+--But also we have a ISNULL function,that i'll apply in the next lessons
+SELECT *
+FROM Employees
+WHERE Salary IN (4000, 6000)
+   OR Salary IS NULL
