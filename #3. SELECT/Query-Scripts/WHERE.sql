@@ -93,10 +93,20 @@ FROM Employees
 WHERE Id LIKE '[^2-7]2'
 
 --ESCAPE keyword
---TODO: investigate the ESCAPE keyword
-SELECT *
+---------- Start of /ESCAPE/ investigation ------------
+
+--Add Discount column for including % character
+ALTER TABLE Employees
+    ADD InternalGoodsDiscount VARCHAR(10)
+
+UPDATE Employees
+SET InternalGoodsDiscount = IIF(Id > 50, '10%', '10+')
+
+SELECT Id, InternalGoodsDiscount
 FROM Employees
-WHERE FName LIKE '%Bob' ESCAPE '\'
+WHERE InternalGoodsDiscount LIKE '10\%' ESCAPE '\'
+
+---------- End of /ESCAPE/ investigation ------------
 
 --8) Compare with NULL
 --Note: salary within found records must be NULL
