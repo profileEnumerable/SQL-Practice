@@ -28,7 +28,7 @@ INSERT INTO MyTest (Field)
 VALUES ('DATA')
 GO
 
-SELECT @@IDENTITY--in case of emty MyTest table returns 1
+SELECT @@IDENTITY--in case of empty MyTest table returns 1
 GO
 
 --@ROWCOUNT:returns amount of modified records by last executed command
@@ -58,3 +58,14 @@ SELECT ISNUMERIC('21'),
        ISNUMERIC(@myId),
        ISNUMERIC('+'),--But &,@,* are not recognized as numeric
        ISNUMERIC('-')
+
+--ISNULL
+SELECT Id, LName, ISNULL(Salary, 0.0) AS Salary--returns second param when first is null,otherwise first
+FROM Employees
+
+DECLARE @myInt INT
+PRINT @myInt
+SELECT 3 + @myInt, 3 + ISNULL(@myInt, 0)
+
+--COALESCE
+SELECT COALESCE(NULL, NULL, 'three', 'four') --returns first value that isn't null
