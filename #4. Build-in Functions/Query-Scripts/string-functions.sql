@@ -28,5 +28,21 @@ PRINT RTRIM('functions   ')
 
 PRINT 'Move' + SPACE(3) + 'on'
 PRINT REPLICATE('R', 10)
-       
-       
+
+SELECT CHARINDEX('one', 'one step, two step, one step again'),
+       CHARINDEX('one', 'one step, two step, one step again', 2),--third param is the start location
+       PATINDEX('%pa__ern', 'find the word using pattern')
+
+SELECT REPLACE('1235', '5', '4')
+
+--Concat function
+SELECT 'Show' + ' ' + 'up',
+       'Show' + ' ' + NULL,
+       'Show' + ' ' + ISNULL(NULL, ''),
+       CONCAT('Show', ' ', NULL)--just ignore null parameters
+
+SELECT value
+FROM STRING_SPLIT('1,2,3,4,5', ',')
+
+--Investigate STRING_AGG function
+    
