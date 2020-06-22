@@ -15,7 +15,7 @@ SELECT LEFT('abcdefg', 3)  [LEFT],
        RIGHT('abcdefg', 3) [RIGHT],
        LOWER('ABCDEFG')    [LOWER],
        UPPER('abcdefg')    [UPPER],
-       LEN('  123  ')      [LEN], --investigate!
+       LEN('  123  ')      [LEN], --TODO:investigate!
        REVERSE('321')      [REVERSE]
 
 --Note STUFF: when we pass 0 as an amount of symbols to remove,the last arg 
@@ -44,5 +44,5 @@ SELECT 'Show' + ' ' + 'up',
 SELECT value
 FROM STRING_SPLIT('1,2,3,4,5', ',')
 
---Investigate STRING_AGG function
+--TODO:Investigate STRING_AGG function
     
