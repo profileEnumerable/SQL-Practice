@@ -1,4 +1,4 @@
-﻿--Math Functions
+﻿﻿--Math Functions
 
 --Exponentiation
 SELECT SQRT(196),
