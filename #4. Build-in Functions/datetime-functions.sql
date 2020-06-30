@@ -32,10 +32,10 @@ SELECT DATEFROMPARTS(1999, 09, 15),
 --DATEDIFF DATEADD
 SELECT DATEDIFF(YEAR, '20170101', '20200101')  AS [YEARS],
        DATEDIFF(MONTH, '20170831', '20171201') AS [MONTHS],--calculates the number of overcome boundaries. Res:4,but really 3
-       DATEADD(YEAR, -5, GETDATE())
+       DATEADD(QUARTER, -1, GETDATE())
 
 --Practical examples
---Note: less accurate example
+--Note: less(but Sql server 2017 shows the same results in both queries) accurate example
 SELECT Id, LName, BirthDate
 FROM Employees
 WHERE DATEDIFF(YEAR, BirthDate, GETDATE()) < 30
@@ -43,5 +43,10 @@ WHERE DATEDIFF(YEAR, BirthDate, GETDATE()) < 30
 --Note: more accurate example
 SELECT Id, LName, BirthDate
 FROM Employees
-WHERE BirthDate > DATEADD(YEAR, -30, GETDATE())
+WHERE BirthDate > DATEADD(YEAR, -30, GETDATE());
+
+
+declare @pastDate as date = DATEADD(YEAR, -30, GETDATE())
+print @pastDate
+
 
