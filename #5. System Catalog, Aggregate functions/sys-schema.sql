@@ -36,7 +36,7 @@ EXEC sp_help 'Person.Address'--similar to sys.object view, but with separating b
 EXEC sp_tables--similar to sys.tables
 
 EXEC sp_tables @TABLE_OWNER = 'dbo'
---specified the name of parameter 
+--specified the name(TABLE_OWNER) of parameter 
 
 --necessarily to pass the @table_name parameter    
 EXEC sp_columns 'Address'
